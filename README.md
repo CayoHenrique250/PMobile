@@ -39,7 +39,7 @@ Ao entrar no aplicativo, a primeira tela que será vista será a tela “Login�
 - #57B635
 - #1B5E20
 
-<p> <br> </p>
+---
 
 <div align="center">
   <b>Tela Cadastrar</b>
@@ -61,8 +61,7 @@ A tela “Cadastrar” é de extrema importância para que o usuário consiga ac
 - #5B874B
 - #1B5E20
 
-
-<p> <br> </p>
+---
 
 <div align="center">
   <b>Tela Menu</b>
@@ -87,8 +86,7 @@ Cada botão presente possui uma determinada finalidade, como mostrar os conceito
 - #5B874B
 - #D35443
 
-
-<p> <br> </p>
+---
 
 <div align="center">
   <b>Tela Sobre</b>
@@ -110,8 +108,7 @@ A tela sobre mostrará os conceitos básicos de assuntos relacionados ao meio am
 - #CCFF90
 - #1B5E20
 
-
-<p> <br> </p>
+---
 
 <div align="center">
   <b>Tela Perfil</b>
@@ -133,8 +130,7 @@ A tela “Perfil” contará com as informações do usuário, como o nome, ocup
 - #33691E
 - #8BC34A
 
-
-<p> <br> </p>
+---
 
 <div align="center">
   <b>Tela Tutoriais</b>
@@ -157,8 +153,7 @@ A tela “Tutoriais” irá conter containers em que mostrarão de forma clara e
 - #CCFF90
 - #F8FF04
 
-
-<p> <br> </p>
+---
 
 <div align="center">
   <b>Tela Tutorial</b>
