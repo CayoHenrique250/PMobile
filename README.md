@@ -13,13 +13,6 @@ A presença de uma paleta de cores em um aplicativo é de extrema importância, 
   <img src="imagens README/Paleta de cores.png" alt="Paleta de cores" width="300">
 </div>  
 
-## 👨‍💻​ Desenvolvedores: 
-
-* [Amanda Fernandes](https://github.com/amandaafs/)
-* [Cayo Henrique](https://github.com/CayoHenrique250/)
-* [Natally Emanuelle](https://github.com/Natally02/)
-* [Silmara Nunes](https://github.com/sil008/)
-
 <p> <br> </p>
 
 ## Telas do aplicativo:
@@ -199,3 +192,14 @@ Em síntese, o aplicativo "TSMA: Tecnologia a serviço do meio ambiente" demonst
 Nesse contexto, o nosso aplicativo desempenha um papel fundamental ao preencher essa lacuna, aprimorando e apresentando os ensinamentos do site de forma diversificada e lúdica. Além disso, ressaltando a relevância da sustentabilidade para o planeta e a importância de uma ferramenta que incentive as crianças e auxilie educadores e familiares a abordarem esse tema.
 
 Por conjuntura, o aplicativo "TSMA: Tecnologia a serviço do meio ambiente" cumpre sua proposta de educar, inspirar e engajar alunos, professores, pais e a comunidade em geral na adoção de práticas sustentáveis. Por meio dessa iniciativa, é buscado contribuir para um futuro mais consciente e ecologicamente responsável, onde a preservação do meio ambiente seja uma prioridade.
+
+<p> <br> </p>
+
+## 👨‍💻​ Desenvolvedores: 
+
+* [Amanda Fernandes](https://github.com/amandaafs/)
+* [Cayo Henrique](https://github.com/CayoHenrique250/)
+* [Natally Emanuelle](https://github.com/Natally02/)
+* [Silmara Nunes](https://github.com/sil008/)
+
+<p> <br> </p>
