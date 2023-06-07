@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
-import 'package:projeto/widgets/tutoriais/CardTutoriais.dart';
+import 'package:projeto/widgets/CardTutoriais.dart';
 import 'package:projeto/telas/TelaMenu.dart';
 import 'package:projeto/tutoriais/Tutorial1.dart';
 import 'package:projeto/tutoriais/Tutorial2.dart';
@@ -22,8 +22,15 @@ class _TelaTutoriaisState extends State<TelaTutoriais> {
           child: ListView(
             children: [
               ContainerTopo(
-                titulo: "Tutoriais",
-              ),
+                titulo: "Tutoriais", 
+                heightGreen: 230, 
+                topWhite: 80, 
+                heightWhite: 100, 
+                widthWhite: 300, 
+                textLeft: 20, 
+                textTop: 115, 
+                fontSize: 30,
+                ),
               SizedBox(
                 height: height * 0.05,
               ),

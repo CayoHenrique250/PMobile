@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto/widgets/tutoriais/ContainerTopoTutorial.dart';
+import 'package:projeto/widgets/ContainerTopo.dart';
 import 'TelaLogin.dart';
 
 class TelaCadastrar extends StatefulWidget {
@@ -24,7 +24,16 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
         body: Padding(
             padding: const EdgeInsets.all(0.2),
             child: ListView(children: [
-              ContainerTopoTutorial(titulo: "Cadastrar"),
+              ContainerTopo(
+                titulo: "Cadastrar", 
+                heightGreen: 150, 
+                topWhite: 40, 
+                heightWhite: 60, 
+                widthWhite: 300, 
+                textLeft: 15, 
+                textTop: 60, 
+                fontSize: 20,
+              ),
               buildTextFild(),
               buildCadastrar(),
             ])),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto/widgets/tutoriais/ContainerTextoTutoriais.dart';
-import 'package:projeto/widgets/tutoriais/ContainerTituloTutorial.dart';
-import 'package:projeto/widgets/tutoriais/ContainerTopoTutorial.dart';
-import 'package:projeto/widgets/tutoriais/ContainerImagensTutoriais.dart';
+import 'package:projeto/widgets/ContainerTextoTutoriais.dart';
+import 'package:projeto/widgets/ContainerTituloTutorial.dart';
+import 'package:projeto/widgets/ContainerTopo.dart';
+import 'package:projeto/widgets/ContainerImagensTutoriais.dart';
 import 'package:projeto/telas/TelaTutoriais.dart';
 
 class Tutorial2 extends StatefulWidget {
@@ -21,8 +21,15 @@ class _Tutorial2State extends State<Tutorial2> {
         body: Padding(
             padding: const EdgeInsets.all(0.2),
             child: ListView(children: [
-              ContainerTopoTutorial(
-                titulo: "Porco espinho de revista",
+              ContainerTopo(
+                titulo: "Porco espinho de revista", 
+                heightGreen: 150, 
+                topWhite: 40, 
+                heightWhite: 60, 
+                widthWhite: 300, 
+                textLeft: 15, 
+                textTop: 60, 
+                fontSize: 20,
               ),
               buildVideo(),
               ContainerTituloTutorial(
