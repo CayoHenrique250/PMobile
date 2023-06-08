@@ -23,6 +23,13 @@ class _TelaSobreState extends State<TelaSobre> {
             children: [
               ContainerTopo(
                 titulo: "Sobre",
+                heightGreen: 230,
+                topWhite: 80,
+                heightWhite: 100,
+                widthWhite: 300,
+                textLeft: 20,
+                textTop: 115,
+                fontSize: 30,
               ),
               SizedBox(
                 height: height * 0.05,

@@ -19,6 +19,13 @@ class _TelaLoginState extends State<TelaLogin> {
           children: [
             ContainerTopo(
               titulo: "Login",
+              heightGreen: 230,
+              topWhite: 80,
+              heightWhite: 100,
+              widthWhite: 300,
+              textLeft: 20,
+              textTop: 115,
+              fontSize: 30,
             ),
             buildForm(context),
           ],
