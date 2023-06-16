@@ -4,6 +4,7 @@ import 'package:projeto/widgets/CardTutoriais.dart';
 import 'package:projeto/telas/TelaMenu.dart';
 import 'package:projeto/tutoriais/Tutorial1.dart';
 import 'package:projeto/tutoriais/Tutorial2.dart';
+import 'package:projeto/widgets/CircleBack.dart';
 
 class TelaTutoriais extends StatefulWidget {
   @override
@@ -55,16 +56,7 @@ class _TelaTutoriaisState extends State<TelaTutoriais> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Color(0xFF33691E),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TelaMenu()),
-            );
-          },
-          child: const Icon(Icons.arrow_back),
-        ),
+        floatingActionButton: CircleBack(),
       ),
     );
   }

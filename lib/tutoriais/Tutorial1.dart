@@ -3,7 +3,7 @@ import 'package:projeto/widgets/ContainerTextoTutoriais.dart';
 import 'package:projeto/widgets/ContainerTituloTutorial.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
 import 'package:projeto/widgets/ContainerImagensTutoriais.dart';
-import 'package:projeto/telas/TelaTutoriais.dart';
+import 'package:projeto/widgets/CircleBack.dart';
 
 class Tutorial1 extends StatefulWidget {
   @override
@@ -71,16 +71,7 @@ class _Tutorial1State extends State<Tutorial1> {
                   imagem: 'assets/imagens/tutorial1/imagem6.png'),
               Text("\n\n\n"),
             ])),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Color(0xFF33691E),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TelaTutoriais()),
-            );
-          },
-          child: const Icon(Icons.arrow_back),
-        ),
+        floatingActionButton: CircleBack(),
       ),
     );
   }

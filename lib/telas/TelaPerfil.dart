@@ -140,10 +140,7 @@ class _TelaPerfilState extends State<TelaPerfil> {
           color: Colors.white,
         ),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => TelaMenu()),
-          );
+          Navigator.pop(context);
         },
       ),
     );
