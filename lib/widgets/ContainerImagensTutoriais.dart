@@ -17,7 +17,7 @@ class _ContainerImagensTutoriaisState extends State<ContainerImagensTutoriais> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(0),
+      padding: EdgeInsets.zero,
       child: Container(
         height: 180,
         child: Image.asset(
