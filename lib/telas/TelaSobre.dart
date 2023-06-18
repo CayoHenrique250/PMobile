@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto/widgets/CardConceito.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
 import 'TelaMenu.dart';
+import 'package:projeto/widgets/CircleBack.dart';
 
 class TelaSobre extends StatefulWidget {
   const TelaSobre({Key? key}) : super(key: key);
@@ -61,16 +62,7 @@ class _TelaSobreState extends State<TelaSobre> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Color(0xFF33691E),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TelaMenu()),
-            );
-          },
-          child: const Icon(Icons.arrow_back),
-        ),
+        floatingActionButton: CircleBack(),
       ),
     );
   }
