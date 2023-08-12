@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'TelaMenu.dart';
+import 'package:projeto/widgets/CardPerfilTitulo.dart';
+import 'package:projeto/widgets/CardPerfilDados.dart';
+import 'package:projeto/domain/Perfil.dart';
+import 'package:projeto/db/PerfilDao.dart';
+import 'package:projeto/widgets/CircularProgress.dart';
 
 class TelaPerfil extends StatefulWidget {
   const TelaPerfil({super.key});
@@ -9,11 +13,12 @@ class TelaPerfil extends StatefulWidget {
 }
 
 class _TelaPerfilState extends State<TelaPerfil> {
+  Future<List<Perfil>> futureLista = PerfilDao().findAll();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: buildAppBar(),
         body: ListView(
           children: [
             Center(
@@ -28,69 +33,64 @@ class _TelaPerfilState extends State<TelaPerfil> {
                 ],
               ),
             ),
-            buildColumnText(),
+            const SizedBox(height: 16),
+            FutureBuilder<List<Perfil>>(
+              future: futureLista,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgress());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (snapshot.hasData) {
+                  var lista = snapshot.data!;
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: lista.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          CardPerfilTitulo(
+                            perfil: lista[index],
+                          ),
+                          CardPerfilDados(
+                            perfil: lista[index],
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  return const Center(child: Text('No data available.'));
+                }
+              },
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                margin: const EdgeInsets.all(35.0),
+                width: 250,
+                height: 35,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFD35443),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'SAIR',
+                    style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
-    );
-  }
-
-  buildColumnText() {
-    return Column(
-      children: [
-        SizedBox(height: 20),
-        Text(
-          'Nome:',
-          style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
-            color: Colors.lightGreen,
-          ),
-        ),
-        SizedBox(height: 14),
-        Text(
-          'Aluno',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        SizedBox(height: 20),
-        Text(
-          'ID:',
-          style: TextStyle(
-            fontSize: 19,
-            fontWeight: FontWeight.w700,
-            color: Colors.lightGreen,
-          ),
-        ),
-        SizedBox(height: 14),
-        Text(
-          '4002',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        SizedBox(height: 20),
-        Text(
-          'Ocupação:',
-          style: TextStyle(
-            fontSize: 19,
-            fontWeight: FontWeight.w700,
-            color: Colors.lightGreen,
-          ),
-        ),
-        SizedBox(height: 14),
-        Text(
-          'Estudante',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        SizedBox(height: 8),
-      ],
     );
   }
 
@@ -112,8 +112,8 @@ class _TelaPerfilState extends State<TelaPerfil> {
       width: 150,
       height: 150,
       child: CircleAvatar(
-        backgroundImage: NetworkImage(
-          'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png',
+        backgroundImage: AssetImage(
+          'assets/imagens/avatar.png',
         ),
       ),
       decoration: BoxDecoration(
@@ -126,22 +126,6 @@ class _TelaPerfilState extends State<TelaPerfil> {
           )
         ],
         shape: BoxShape.circle,
-      ),
-    );
-  }
-
-  buildAppBar() {
-    return AppBar(
-      title: Text('Perfil'),
-      backgroundColor: Color(0xFF33691E),
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          Navigator.pop(context);
-        },
       ),
     );
   }

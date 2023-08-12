@@ -15,7 +15,10 @@ class _CircleBackState extends State<CircleBack> {
       onPressed: () {
         Navigator.pop(context);
       },
-      child: const Icon(Icons.arrow_back),
+      child: const Icon(
+        Icons.arrow_back,
+        color: Colors.white,
+      ),
     );
   }
 }

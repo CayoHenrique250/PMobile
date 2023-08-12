@@ -1,25 +1,14 @@
 //import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:projeto/tutoriais/Tutorial1.dart';
-import 'package:projeto/tutoriais/Tutorial2.dart';
+import 'package:projeto/domain/tutoriais.dart';
 
 class CardTutoriais extends StatefulWidget {
-  final String imagem;
-  final String titulo;
-  final int cor;
-  final int cor_titulo;
-  final String descricao;
-  final Widget proxima;
+  final Tutoriais cardTutorias;
 
   const CardTutoriais({
+    required this.cardTutorias,
     Key? key,
-    required this.imagem,
-    required this.titulo,
-    required this.cor,
-    required this.cor_titulo,
-    required this.descricao,
-    required this.proxima,
   }) : super(key: key);
 
   @override
@@ -39,10 +28,10 @@ class _CardTutoriaisState extends State<CardTutoriais> {
                 right: 20,
                 child: Material(
                   child: Container(
-                    height: 200,
+                    height: 220,
                     width: 350,
                     decoration: BoxDecoration(
-                      color: Color(widget.cor),
+                      color: Color(widget.cardTutorias.cor),
                       borderRadius: BorderRadius.circular(0.0),
                       boxShadow: [
                         new BoxShadow(
@@ -71,7 +60,7 @@ class _CardTutoriaisState extends State<CardTutoriais> {
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: NetworkImage(widget.imagem),
+                          image: AssetImage(widget.cardTutorias.imagem),
                         ),
                       ),
                     ))),
@@ -80,21 +69,21 @@ class _CardTutoriaisState extends State<CardTutoriais> {
               left: 200,
               child: Container(
                 height: 230,
-                width: 180,
+                width: 170,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.titulo,
+                    Text(widget.cardTutorias.titulo,
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Color(widget.cor_titulo))),
+                            color: Color(widget.cardTutorias.cor_titulo))),
                     Divider(color: Colors.black),
                     Text(
-                      widget.descricao,
+                      widget.cardTutorias.descricao,
                       style: TextStyle(fontSize: 15, color: Colors.black),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 13),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFFF8FF04)),
@@ -102,7 +91,8 @@ class _CardTutoriaisState extends State<CardTutoriais> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => widget.proxima),
+                              builder: (context) =>
+                                  widget.cardTutorias.proxima),
                         );
                       },
                       child: Text(

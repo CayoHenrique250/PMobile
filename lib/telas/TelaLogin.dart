@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projeto/telas/telaPrincipal.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
-import 'TelaMenu.dart';
 import 'TelaCadastrar.dart';
 
 class TelaLogin extends StatefulWidget {
@@ -90,13 +90,16 @@ buildForm(BuildContext context) {
                     print('correto');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TelaMenu()),
+                      MaterialPageRoute(builder: (context) => TelaPrincipal()),
                     );
                   } else {
                     print('aaaaa');
                   }
                 },
-                child: Text('ENTRAR')),
+                child: Text(
+                  'ENTRAR',
+                  style: TextStyle(color: Colors.white),
+                )),
           ),
         ),
         Center(
@@ -118,7 +121,8 @@ buildForm(BuildContext context) {
                     MaterialPageRoute(builder: (context) => TelaCadastrar()),
                   );
                 },
-                child: Text('CADASTRAR')),
+                child:
+                    Text('CADASTRAR', style: TextStyle(color: Colors.white))),
           ),
         ),
       ],
