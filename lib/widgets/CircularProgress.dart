@@ -9,12 +9,47 @@ class CircularProgress extends StatefulWidget {
   State<CircularProgress> createState() => _CircularProgressState();
 }
 
-class _CircularProgressState extends State<CircularProgress> {
+class _CircularProgressState extends State<CircularProgress>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _rotationAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    _rotationAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.linear,
+      ),
+    );
+    _animationController.repeat();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const CircularProgressIndicator(
-        color: Colors.green,
-        backgroundColor: Colors.greenAccent,
-        strokeWidth: 6);
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        RotationTransition(
+          turns: _rotationAnimation,
+          child: Image.asset(
+            'assets/imagens/icon.png', // Substitua pelo caminho correto da imagem
+            width: 48.0,
+            height: 48.0,
+          ),
+        ),
+      ],
+    );
   }
 }
