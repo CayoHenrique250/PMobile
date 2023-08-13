@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:projeto/domain/tutorial.dart';
 
 class ContainerTituloTutorial extends StatefulWidget {
-  final String titulo;
+  final TutorialTitulo tutorialTitulo;
 
   const ContainerTituloTutorial({
     Key? key,
-    required this.titulo,
+    required this.tutorialTitulo,
   }) : super(key: key);
 
   @override
@@ -19,7 +20,7 @@ class _ContainerTituloTutorialState extends State<ContainerTituloTutorial> {
     return Container(
       padding: EdgeInsets.only(left: 25), // Espaçamento inicial à esquerda
       child: Text(
-        widget.titulo,
+        widget.tutorialTitulo.titulo,
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,

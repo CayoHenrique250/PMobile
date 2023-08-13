@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:projeto/domain/tutorial.dart';
 
 class ContainerImagensTutoriais extends StatefulWidget {
-  final String imagem;
+  final TutorialImagem tutorialImagem;
 
   const ContainerImagensTutoriais({
     Key? key,
-    required this.imagem,
+    required this.tutorialImagem,
   }) : super(key: key);
 
   @override
@@ -21,7 +22,7 @@ class _ContainerImagensTutoriaisState extends State<ContainerImagensTutoriais> {
       child: Container(
         height: 180,
         child: Image.asset(
-          widget.imagem,
+          widget.tutorialImagem.imagem,
           fit: BoxFit.scaleDown,
         ),
       ),

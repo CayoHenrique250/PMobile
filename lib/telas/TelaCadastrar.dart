@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projeto/widgets/CircleBack.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
-import 'TelaLogin.dart';
 
 class TelaCadastrar extends StatefulWidget {
   @override
@@ -20,34 +20,24 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Padding(
-            padding: const EdgeInsets.all(0.2),
-            child: ListView(children: [
-              ContainerTopo(
-                titulo: "Cadastrar",
-                heightGreen: 150,
-                topWhite: 40,
-                heightWhite: 60,
-                widthWhite: 300,
-                textLeft: 15,
-                textTop: 60,
-                fontSize: 20,
-              ),
-              buildTextFild(),
-              buildCadastrar(),
-            ])),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Color(0xFF33691E),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TelaLogin()),
-            );
-          },
-          child: const Icon(Icons.arrow_back),
-        ),
-      ),
+          backgroundColor: Colors.white,
+          body: Padding(
+              padding: const EdgeInsets.all(0.2),
+              child: ListView(children: [
+                ContainerTopo(
+                  titulo: "Cadastrar",
+                  heightGreen: 150,
+                  topWhite: 40,
+                  heightWhite: 60,
+                  widthWhite: 300,
+                  textLeft: 15,
+                  textTop: 60,
+                  fontSize: 20,
+                ),
+                buildTextFild(),
+                buildCadastrar(),
+              ])),
+          floatingActionButton: CircleBack()),
     );
   }
 
@@ -174,7 +164,7 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
               ),
             ),
             onPressed: () {},
-            child: Text('CADASTRAR')),
+            child: Text('CADASTRAR', style: TextStyle(color: Colors.white))),
       ),
     );
   }
