@@ -44,7 +44,7 @@ class _CircularProgressState extends State<CircularProgress>
         RotationTransition(
           turns: _rotationAnimation,
           child: Image.asset(
-            'assets/imagens/icon.png', // Substitua pelo caminho correto da imagem
+            'assets/imagens/icon.png',
             width: 48.0,
             height: 48.0,
           ),
