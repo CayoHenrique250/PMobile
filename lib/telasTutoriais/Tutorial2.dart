@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto/widgets/ContainerTextoTutoriais.dart';
-import 'package:projeto/widgets/ContainerTituloTutorial.dart';
+import 'package:projeto/widgets/TutorialWidgetsBody.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
-import 'package:projeto/widgets/ContainerImagensTutoriais.dart';
 import 'package:projeto/widgets/CircleBack.dart';
-import 'package:projeto/widgets/videoPlayerTutorial.dart';
+import 'package:projeto/widgets/TutorialWidgetsTop.dart';
 import 'package:projeto/domain/tutorial.dart';
 import 'package:projeto/db/tutorial2Dao.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
@@ -13,11 +11,35 @@ class Tutorial2 extends StatefulWidget {
   const Tutorial2({super.key});
 
   @override
-  State<Tutorial2> createState() => _Tutorial2State();
+  State<Tutorial2> createState() => _Tutorial1State();
 }
 
-class _Tutorial2State extends State<Tutorial2> {
-  Future<List<Object>> futureLista = Tutorial2Dao().findAll();
+class _Tutorial1State extends State<Tutorial2> {
+  final ScrollController _scrollController = ScrollController();
+  bool _isVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset > 200) {
+      setState(() {
+        _isVisible = true;
+      });
+    } else {
+      setState(() {
+        _isVisible = false;
+      });
+    }
+  }
+
+  Future<List<TutorialWidgets>> futureLista = TutorialWidgetsDao().findAll();
+  Future<List<TutorialWidgetsTextImg>> futureLista2 =
+      TutorialWidgetsTextImgDao().findAll();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,57 +47,97 @@ class _Tutorial2State extends State<Tutorial2> {
         backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.all(0.2),
-            child: ListView(children: [
-              ContainerTopo(
-                titulo: "Porco espinho de revista",
-                heightGreen: 150,
-                topWhite: 40,
-                heightWhite: 60,
-                widthWhite: 300,
-                textLeft: 15,
-                textTop: 60,
-                fontSize: 20,
-              ),
-              const SizedBox(height: 16),
-              FutureBuilder<List<Object>>(
-                future: futureLista,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgress());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (snapshot.hasData) {
-                    var lista = snapshot.data!;
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: lista.length,
-                      itemBuilder: (context, index) {
-                        var item = lista[index];
-
-                        if (item is TutorialTitulo) {
-                          return ContainerTituloTutorial(tutorialTitulo: item);
-                        } else if (item is TutorialTexto) {
-                          return ContainerTextoTutoriais(tutorialTexto: item);
-                        } else if (item is TutorialImagem) {
-                          return ContainerImagensTutoriais(
-                              tutorialImagem: item);
-                        } else if (item is TutorialVideo) {
-                          return VideoPlayerTutoriais(tutorialVideo: item);
+            child: Stack(
+              children: [
+                ListView(controller: _scrollController, children: [
+                  const ContainerTopo(
+                    titulo: "Porco espinho de revista",
+                    heightGreen: 150,
+                    topWhite: 40,
+                    heightWhite: 60,
+                    widthWhite: 300,
+                    textLeft: 15,
+                    textTop: 60,
+                    fontSize: 20,
+                  ),
+                  const SizedBox(height: 16),
+                  FutureBuilder<List<TutorialWidgets>>(
+                      future: futureLista,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          var lista = snapshot.data!;
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: lista.length,
+                            itemBuilder: (context, index) {
+                              return TutorialWidgetsTop(
+                                  tutorialWidgets: lista[index]);
+                            },
+                          );
                         }
 
-                        return Container(); // Retornar algo padrão caso o tipo não seja reconhecido
+                        return const Center();
+                      }),
+                  FutureBuilder<List<TutorialWidgetsTextImg>>(
+                      future: futureLista2,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          var lista = snapshot.data!;
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: lista.length,
+                            itemBuilder: (context, index) {
+                              return TutorialWidgetsBody(
+                                  tutorialWidgetsBody: lista[index]);
+                            },
+                          );
+                        }
+
+                        return const Center(child: CircularProgress());
+                      }),
+                  const SizedBox(height: 56),
+                ]),
+                if (_isVisible)
+                  Positioned(
+                    bottom: 20,
+                    left: 135,
+                    child: GestureDetector(
+                      onTap: () {
+                        _scrollController.animateTo(0,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut);
                       },
-                    );
-                  } else {
-                    return const Center(child: Text('No data available.'));
-                  }
-                },
-              ),
-              SizedBox(height: 56),
-            ])),
-        floatingActionButton: CircleBack(),
+                      child: Container(
+                        width: 140,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.lime,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Voltar ao topo",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            )),
+        floatingActionButton: const CircleBack(),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
   }
 }

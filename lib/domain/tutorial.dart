@@ -1,31 +1,55 @@
-class TutorialTitulo {
-  final String titulo;
+class TutorialWidgets {
+  late String video;
+  late String titulo;
+  late String texto;
+  late String titulo2;
 
-  const TutorialTitulo({
+  TutorialWidgets({
+    required this.video,
     required this.titulo,
-  });
-}
-
-class TutorialTexto {
-  final String texto;
-
-  const TutorialTexto({
     required this.texto,
+    required this.titulo2,
   });
+
+  TutorialWidgets.fromJson(Map<String, dynamic> json) {
+    video = json['VIDEO'];
+    titulo = json['TITULO'];
+    texto = json['TEXTO'];
+    titulo2 = json['TITULO2'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['VIDEO'] = this.video;
+    data['TITULO'] = this.titulo;
+    data['TEXTO'] = this.texto;
+    data['TITULO2'] = this.titulo2;
+
+    return data;
+  }
 }
 
-class TutorialImagem {
-  final String imagem;
+class TutorialWidgetsTextImg {
+  late String texto;
+  late String imagem;
 
-  const TutorialImagem({
+  TutorialWidgetsTextImg({
+    required this.texto,
     required this.imagem,
   });
-}
 
-class TutorialVideo {
-  final String video;
+  TutorialWidgetsTextImg.fromJson(Map<String, dynamic> json) {
+    texto = json['TEXTO'];
+    imagem = json['IMAGEM'];
+  }
 
-  const TutorialVideo({
-    required this.video,
-  });
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['TEXTO'] = this.texto;
+    data['IMAGEM'] = this.imagem;
+
+    return data;
+  }
 }
