@@ -1,35 +1,41 @@
 import 'package:projeto/domain/tutorial.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:projeto/db/DBHelperTutorial2.dart';
 
-class Tutorial2Dao {
-  var listTutorial2 = const [
-    TutorialVideo(video: 'assets/videos/video.mp4'),
-    TutorialTitulo(titulo: 'Materiais:'),
-    TutorialTexto(
-        texto:
-            '• Papelão; \n• Revista; \n• Tesoura sem ponta; \n• Lápis; \n• Cola branca; \n• Caneta permanente.'),
-    TutorialTitulo(titulo: 'Como fazer?'),
-    TutorialTexto(
-        texto:
-            '1- Com o lápis desenhe o molde do corpo do porco-espinho no papelão e recorte com a tesoura;'),
-    TutorialImagem(imagem: 'assets/imagens/tutorial2/imagem1.png'),
-    TutorialTexto(
-        texto:
-            '2- Pegue a revista e recorte vários pedacinhos em formato de triângulos;'),
-    TutorialImagem(imagem: 'assets/imagens/tutorial2/imagem2.png'),
-    TutorialTexto(
-        texto:
-            '3- Pegue a cola e cole os pedacinhos de papel no molde do porco-espinho, deixando só a parte do rosto livre, colocando as pontas dos triângulos para fora para parecerem espinhos;'),
-    TutorialImagem(imagem: 'assets/imagens/tutorial2/imagem3.png'),
-    TutorialTexto(
-        texto:
-            '4- Enquanto espera secar, desenhe com o lápis piloto o rosto de porco-espinho;'),
-    TutorialImagem(imagem: 'assets/imagens/tutorial2/imagem4.png'),
-    TutorialTexto(
-        texto: '5- E está pronto! Agora é só deixar a criançada se divertir!'),
-    TutorialImagem(imagem: 'assets/imagens/tutorial2/imagem5.png')
-  ];
-  Future<List<Object>> findAll() async {
+class TutorialWidgetsDao {
+  Future<List<TutorialWidgets>> findAll() async {
     await Future.delayed(const Duration(seconds: 5));
-    return listTutorial2;
+    DBHelperTutorialWidget dbHelperTutorialWidgets = DBHelperTutorialWidget();
+    Database db = await dbHelperTutorialWidgets.initDB();
+
+    String sql = 'SELECT * FROM TUTORIAL2;';
+    final resultSet = await db.rawQuery(sql);
+
+    List<TutorialWidgets> list = [];
+    for (var json in resultSet) {
+      TutorialWidgets tutorialWidgets = TutorialWidgets.fromJson(json);
+      list.add(tutorialWidgets);
+    }
+
+    return list;
+  }
+}
+
+class TutorialWidgetsTextImgDao {
+  Future<List<TutorialWidgetsTextImg>> findAll() async {
+    await Future.delayed(const Duration(seconds: 5));
+    DBHelperTutorialWidgetsTextImg dbHelperTutorialWidgetsTextImg = DBHelperTutorialWidgetsTextImg();
+    Database db = await dbHelperTutorialWidgetsTextImg.initDB();
+
+    String sql = 'SELECT * FROM TEXTO_IMG2;';
+    final resultSet = await db.rawQuery(sql);
+
+    List<TutorialWidgetsTextImg> list = [];
+    for (var json in resultSet) {
+      TutorialWidgetsTextImg tutorialWidgetsTextImg = TutorialWidgetsTextImg.fromJson(json);
+      list.add(tutorialWidgetsTextImg);
+    }
+
+    return list;
   }
 }
