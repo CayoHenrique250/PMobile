@@ -16,14 +16,17 @@ class TelaPortal extends StatefulWidget {
 class _TelaPortalState extends State<TelaPortal> {
   @override
   Widget build(BuildContext context) {
-    Future<List<Object>> futureLista = TelaPortalDao().findAll();
+
+    Future<List<PortalCard>> futureLista2 = PortalCardDao().findAll();
+    Future<List<Portal>> futureLista = PortalDao().findAll();
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.all(0.2),
             child: ListView(children: [
-              ContainerTopo(
+              const ContainerTopo(
                 titulo: "Portal",
                 heightGreen: 230,
                 topWhite: 80,
@@ -34,36 +37,40 @@ class _TelaPortalState extends State<TelaPortal> {
                 fontSize: 30,
               ),
               const SizedBox(height: 16),
-              FutureBuilder<List<Object>>(
-                future: futureLista,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
+              FutureBuilder<List<PortalCard>>(
+                  future: futureLista2,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      var lista = snapshot.data!;
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: lista.length,
+                        itemBuilder: (context, index) {
+                          return ContainerPortalCard(portalCard: lista[index]);
+                        },
+                      );
+                    }
+
+                    return const Center();
+                  }),
+              FutureBuilder<List<Portal>>(
+                  future: futureLista,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      var lista = snapshot.data!;
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: lista.length,
+                        itemBuilder: (context, index) {
+                          return ContainerPortal(portal: lista[index]);
+                        },
+                      );
+                    }
+
                     return const Center(child: CircularProgress());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (snapshot.hasData) {
-                    var lista = snapshot.data!;
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: lista.length,
-                      itemBuilder: (context, index) {
-                        var item = lista[index];
-
-                        if (item is PortalCard) {
-                          return ContainerPortalCard(portalCard: item);
-                        } else if (item is Portal) {
-                          return ContainerPortal(portal: item);
-                        }
-
-                        return Container(); // Retornar algo padrão caso o tipo não seja reconhecido
-                      },
-                    );
-                  } else {
-                    return const Center(child: Text('No data available.'));
-                  }
-                },
-              ),
+                  }),
             ])),
       ),
     );
