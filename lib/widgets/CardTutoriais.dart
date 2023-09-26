@@ -1,13 +1,16 @@
-//import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:projeto/domain/tutoriais.dart';
 
+import '../telasTutoriais/Tutorial1.dart';
+import '../telasTutoriais/Tutorial2.dart';
+
 class CardTutoriais extends StatefulWidget {
   final Tutoriais cardTutorias;
+  final int one;
 
   const CardTutoriais({
     required this.cardTutorias,
+    required this.one, 
     Key? key,
   }) : super(key: key);
 
@@ -31,7 +34,7 @@ class _CardTutoriaisState extends State<CardTutoriais> {
                     height: 220,
                     width: 350,
                     decoration: BoxDecoration(
-                      color: Color(widget.cardTutorias.cor),
+                      color: Color(int.parse(widget.cardTutorias.cor)),
                       borderRadius: BorderRadius.circular(0.0),
                       boxShadow: [
                         new BoxShadow(
@@ -77,32 +80,42 @@ class _CardTutoriaisState extends State<CardTutoriais> {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Color(widget.cardTutorias.cor_titulo))),
+                            color: Color(int.parse(widget.cardTutorias.cor_titulo)))),
                     Divider(color: Colors.black),
                     Text(
                       widget.cardTutorias.descricao,
                       style: TextStyle(fontSize: 15, color: Colors.black),
                     ),
-                    SizedBox(height: 13),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFF8FF04)),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  widget.cardTutorias.proxima),
-                        );
-                      },
+                    Container(
+                      height: 40,
+                      width: 130, 
+                      margin: EdgeInsets.only(top: 10, bottom: 30),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFF8FF04)),
+                        onPressed: () {
+                          if(widget.one == 0) {
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Tutorial1()),
+                          );
+                          } else {
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Tutorial2()),
+                          );
+                          }
+                        },
                       child: Text(
                         'VER',
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                        ),
-                      ),
+                       ),
+                       ),
+                      )
                     )
                   ],
                 ),
