@@ -1,6 +1,6 @@
 import 'package:projeto/domain/tutorial.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:projeto/db/DBHelperTutorial1.dart';
+import 'package:projeto/db/DBHelper.dart';
 
 class TutorialWidgetsDao {
   Future<List<TutorialWidgets>> findAll() async {
@@ -32,7 +32,8 @@ class TutorialWidgetsTextImgDao {
 
     List<TutorialWidgetsTextImg> list = [];
     for (var json in resultSet) {
-      TutorialWidgetsTextImg tutorialWidgetsTextImg = TutorialWidgetsTextImg.fromJson(json);
+      TutorialWidgetsTextImg tutorialWidgetsTextImg =
+          TutorialWidgetsTextImg.fromJson(json);
       list.add(tutorialWidgetsTextImg);
     }
 

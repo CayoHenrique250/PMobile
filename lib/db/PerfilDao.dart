@@ -1,4 +1,4 @@
-import 'package:projeto/domain/user.dart';
+import 'package:projeto/domain/User.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'DBHelper.dart';

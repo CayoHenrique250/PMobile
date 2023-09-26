@@ -1,5 +1,5 @@
 import 'package:projeto/db/DBHelper.dart';
-import 'package:projeto/domain/user.dart';
+import 'package:projeto/domain/User.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 class UserDao {
@@ -11,7 +11,6 @@ class UserDao {
     final resultSet = await db.rawQuery(sql);
 
     print('$resultSet');
-    
   }
 
   salvarUsuario({required User user}) async {
@@ -20,12 +19,12 @@ class UserDao {
     db.insert('user', user.toJson());
   }
 
- Future<bool> autenticar({required String user, required String password}) async {
+  Future<bool> autenticar(
+      {required String user, required String password}) async {
     DBHelper dbHelper = DBHelper();
     Database db = await dbHelper.initDB();
 
-    String sql =
-        'SELECT * FROM user '
+    String sql = 'SELECT * FROM user '
         'WHERE email = ? '
         'AND senha = ?;';
 

@@ -74,22 +74,20 @@ class _TutorialWidgetsTopState extends State<TutorialWidgetsTop> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(20),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-              padding: const EdgeInsets.only(right: 0),
-              child: Text(
-                widget.tutorialWidgets.texto,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+              padding: const EdgeInsets.all(20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: const EdgeInsets.only(right: 0),
+                  child: Text(
+                    widget.tutorialWidgets.texto,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            ) 
-            
-          ),
+              )),
           Container(
             padding: const EdgeInsets.only(right: 220),
             child: Text(

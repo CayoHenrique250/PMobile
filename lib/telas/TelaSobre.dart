@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto/widgets/cardSobre.dart';
+import 'package:projeto/widgets/CardSobre.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
 import 'package:projeto/db/SobreDao.dart';
-import 'package:projeto/domain/sobre.dart';
+import 'package:projeto/domain/Sobre.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
 
 class TelaSobre extends StatefulWidget {

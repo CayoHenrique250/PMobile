@@ -35,4 +35,3 @@ class Tutoriais {
     return data;
   }
 }
-

@@ -4,7 +4,7 @@ import 'package:projeto/widgets/CircleBack.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
 import 'package:projeto/db/UserDao.dart';
-import 'package:projeto/domain/user.dart';
+import 'package:projeto/domain/User.dart';
 
 class TelaCadastrar extends StatefulWidget {
   @override
@@ -19,10 +19,8 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController ocupacaoController = TextEditingController();
 
-
   bool mostrarSenha = true;
   bool mostrarSenha2 = true;
-
 
   String email = '';
   String senha = '';
@@ -146,15 +144,15 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             decoration: InputDecoration(
               labelText: 'Senha',
               suffixIcon: InkWell(
-                    onTap: () {
-                      setState(() {
-                        mostrarSenha = !mostrarSenha;
-                      });
-                    },
-                    child: mostrarSenha
-                        ? Icon(CupertinoIcons.eye_fill)
-                        : Icon(CupertinoIcons.eye_slash),
-                  ),
+                onTap: () {
+                  setState(() {
+                    mostrarSenha = !mostrarSenha;
+                  });
+                },
+                child: mostrarSenha
+                    ? Icon(CupertinoIcons.eye_fill)
+                    : Icon(CupertinoIcons.eye_slash),
+              ),
               border: OutlineInputBorder(),
             ),
           ),
@@ -169,16 +167,16 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             },
             decoration: InputDecoration(
               labelText: 'Confirmar senha',
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      setState(() {
-                        mostrarSenha2 = !mostrarSenha2;
-                      });
-                    },
-                    child: mostrarSenha2
-                        ? Icon(CupertinoIcons.eye_fill)
-                        : Icon(CupertinoIcons.eye_slash),
-                  ),
+              suffixIcon: InkWell(
+                onTap: () {
+                  setState(() {
+                    mostrarSenha2 = !mostrarSenha2;
+                  });
+                },
+                child: mostrarSenha2
+                    ? Icon(CupertinoIcons.eye_fill)
+                    : Icon(CupertinoIcons.eye_slash),
+              ),
               border: OutlineInputBorder(),
             ),
           ),
@@ -204,7 +202,14 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
               ),
             ),
             onPressed: () {
-              onPressed(emailController, passwordController, password2Controller, idController, nomeController, ocupacaoController, context);
+              onPressed(
+                  emailController,
+                  passwordController,
+                  password2Controller,
+                  idController,
+                  nomeController,
+                  ocupacaoController,
+                  context);
             },
             child: Text('CADASTRAR', style: TextStyle(color: Colors.white))),
       ),
@@ -212,26 +217,32 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
   }
 }
 
-Future<void> onPressed(TextEditingController emailController, TextEditingController passwordController, TextEditingController password2Controller, TextEditingController idController, TextEditingController nomeController, TextEditingController ocupacaoController, BuildContext context) async {
-    String email = emailController.text;
-    String password = passwordController.text;
-    String password2 = password2Controller.text;
-    String id = idController.text;
-    String nome = nomeController.text;
-    String ocupacao = ocupacaoController.text;
+Future<void> onPressed(
+    TextEditingController emailController,
+    TextEditingController passwordController,
+    TextEditingController password2Controller,
+    TextEditingController idController,
+    TextEditingController nomeController,
+    TextEditingController ocupacaoController,
+    BuildContext context) async {
+  String email = emailController.text;
+  String password = passwordController.text;
+  String password2 = password2Controller.text;
+  String id = idController.text;
+  String nome = nomeController.text;
+  String ocupacao = ocupacaoController.text;
 
+  if (password == password2) {
+    User user = User(
+        id: id, email: email, senha: password, nome: nome, ocupacao: ocupacao);
+    UserDao().salvarUsuario(user: user);
 
-    if (password == password2) {
-      User user = User(id: id, email: email, senha: password, nome: nome, ocupacao: ocupacao);
-      UserDao().salvarUsuario(user: user);
+    Navigator.pop(context);
+  } else {
+    final snackBar = SnackBar(
+      content: Text('As senhas digitadas são diferentes!'),
+    );
 
-      Navigator.pop(context);
-    } else {
-      final snackBar = SnackBar(
-        content: Text('As senhas digitadas são diferentes!'),
-      );
-
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-  
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }

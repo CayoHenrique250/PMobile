@@ -79,7 +79,6 @@ class _ContainerPortalCardState extends State<ContainerPortalCard> {
                         Divider(color: Colors.black),
                         Text(
                           "Sites Ambientais",
-                          // "Os sites a seguir fornecem informações relevantes e educacionais sobre questões relacionadas ao meio ambiente, sustentabilidade, conservação e preservação dos recursos naturais.",
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.grey,

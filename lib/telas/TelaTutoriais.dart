@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto/db/TutoriaisDao.dart';
-import 'package:projeto/domain/tutoriais.dart';
+import 'package:projeto/domain/Tutoriais.dart';
 import 'package:projeto/widgets/CardTutoriais.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
@@ -45,7 +45,8 @@ class _TelaTutoriaisState extends State<TelaTutoriais> {
                       itemCount: lista.length,
                       itemBuilder: (context, index) {
                         return CardTutoriais(
-                          cardTutorias: lista[index], one: index,
+                          cardTutorias: lista[index],
+                          one: index,
                         );
                       },
                     );
