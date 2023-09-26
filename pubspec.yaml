@@ -36,8 +36,9 @@ dependencies:
   url_launcher: ^6.1.11
   google_nav_bar: ^5.0.6
   video_player: ^2.7.0
-  sqflite:
-  path: 
+  sqflite: ^2.3.0
+  path:
+  image_picker: ^1.0.4 
 
 dev_dependencies:
   flutter_test:
