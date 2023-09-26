@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:projeto/db/PerfilDao.dart';
 import 'package:projeto/widgets/CircleBack.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
+import 'package:projeto/db/UserDao.dart';
+import 'package:projeto/domain/user.dart';
 
 class TelaCadastrar extends StatefulWidget {
   @override
@@ -8,6 +12,18 @@ class TelaCadastrar extends StatefulWidget {
 }
 
 class _TelaCadastrarState extends State<TelaCadastrar> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController password2Controller = TextEditingController();
+  TextEditingController idController = TextEditingController();
+  TextEditingController nomeController = TextEditingController();
+  TextEditingController ocupacaoController = TextEditingController();
+
+
+  bool mostrarSenha = true;
+  bool mostrarSenha2 = true;
+
+
   String email = '';
   String senha = '';
   String con_senha = '';
@@ -52,6 +68,7 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             height: 30,
           ),
           TextField(
+            controller: nomeController,
             onChanged: (Text) {
               nome = Text;
             },
@@ -70,7 +87,7 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             },
             keyboardType: TextInputType.name,
             decoration: const InputDecoration(
-              labelText: ('Sobreome'),
+              labelText: ('Sobrenome'),
               border: OutlineInputBorder(),
             ),
           ),
@@ -78,6 +95,7 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             height: 20,
           ),
           TextField(
+            controller: ocupacaoController,
             onChanged: (Text) {
               ocupacao = Text;
             },
@@ -91,6 +109,7 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             height: 20,
           ),
           TextField(
+            controller: idController,
             onChanged: (Text) {
               id = Text;
             },
@@ -104,6 +123,7 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             height: 20,
           ),
           TextField(
+            controller: emailController,
             onChanged: (Text) {
               email = Text;
             },
@@ -118,13 +138,23 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             height: 20,
           ),
           TextField(
-            obscureText: true,
+            controller: passwordController,
+            obscureText: mostrarSenha,
             onChanged: (Text) {
               senha = Text;
             },
             decoration: InputDecoration(
               labelText: 'Senha',
-              suffixIcon: Icon(Icons.visibility),
+              suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        mostrarSenha = !mostrarSenha;
+                      });
+                    },
+                    child: mostrarSenha
+                        ? Icon(CupertinoIcons.eye_fill)
+                        : Icon(CupertinoIcons.eye_slash),
+                  ),
               border: OutlineInputBorder(),
             ),
           ),
@@ -132,13 +162,23 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             height: 20,
           ),
           TextField(
-            obscureText: true,
+            controller: password2Controller,
+            obscureText: mostrarSenha2,
             onChanged: (Text) {
               con_senha = Text;
             },
             decoration: InputDecoration(
               labelText: 'Confirmar senha',
-              suffixIcon: Icon(Icons.visibility),
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        mostrarSenha2 = !mostrarSenha2;
+                      });
+                    },
+                    child: mostrarSenha2
+                        ? Icon(CupertinoIcons.eye_fill)
+                        : Icon(CupertinoIcons.eye_slash),
+                  ),
               border: OutlineInputBorder(),
             ),
           ),
@@ -163,9 +203,35 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              onPressed(emailController, passwordController, password2Controller, idController, nomeController, ocupacaoController, context);
+            },
             child: Text('CADASTRAR', style: TextStyle(color: Colors.white))),
       ),
     );
   }
+}
+
+Future<void> onPressed(TextEditingController emailController, TextEditingController passwordController, TextEditingController password2Controller, TextEditingController idController, TextEditingController nomeController, TextEditingController ocupacaoController, BuildContext context) async {
+    String email = emailController.text;
+    String password = passwordController.text;
+    String password2 = password2Controller.text;
+    String id = idController.text;
+    String nome = nomeController.text;
+    String ocupacao = ocupacaoController.text;
+
+
+    if (password == password2) {
+      User user = User(id: id, email: email, senha: password, nome: nome, ocupacao: ocupacao);
+      UserDao().salvarUsuario(user: user);
+
+      Navigator.pop(context);
+    } else {
+      final snackBar = SnackBar(
+        content: Text('As senhas digitadas são diferentes!'),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  
 }

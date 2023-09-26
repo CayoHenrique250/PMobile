@@ -1,19 +1,30 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
-import 'package:projeto/widgets/CardPerfilTitulo.dart';
-import 'package:projeto/widgets/CardPerfilDados.dart';
-import 'package:projeto/domain/Perfil.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:projeto/domain/user.dart';
+import 'package:projeto/telas/TelaLogin.dart';
+import 'package:projeto/widgets/Utils.dart';
+import 'package:projeto/widgets/CardPerfil.dart';
 import 'package:projeto/db/PerfilDao.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
 
 class TelaPerfil extends StatefulWidget {
   const TelaPerfil({super.key});
-
   @override
   State<TelaPerfil> createState() => _TelaPerfilState();
 }
 
 class _TelaPerfilState extends State<TelaPerfil> {
-  Future<List<Perfil>> futureLista = PerfilDao().findAll();
+  Uint8List? image;
+
+  Future<User> futureLista = PerfilDao().findByEmail(PerfilDao.email);
+  void selectImage() async {
+    Uint8List img = await pickerImage(ImageSource.gallery);
+    setState(() {
+      image = img;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,37 +45,18 @@ class _TelaPerfilState extends State<TelaPerfil> {
               ),
             ),
             const SizedBox(height: 16),
-            FutureBuilder<List<Perfil>>(
-              future: futureLista,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
+            FutureBuilder<User>(
+                future: futureLista,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    var perfil = snapshot.data!;
+                    return CardPerfil(
+                      perfil: perfil,
+                    );
+                  }
+
                   return const Center(child: CircularProgress());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (snapshot.hasData) {
-                  var lista = snapshot.data!;
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: lista.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          CardPerfilTitulo(
-                            perfil: lista[index],
-                          ),
-                          CardPerfilDados(
-                            perfil: lista[index],
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                } else {
-                  return const Center(child: Text('No data available.'));
-                }
-              },
-            ),
+                }),
             Align(
               alignment: Alignment.center,
               child: Container(
@@ -79,7 +71,14 @@ class _TelaPerfilState extends State<TelaPerfil> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return TelaLogin();
+                        },
+                      ),
+                    );
                   },
                   child: Text(
                     'SAIR',
@@ -108,25 +107,44 @@ class _TelaPerfilState extends State<TelaPerfil> {
   }
 
   buildAvatar() {
-    return Container(
-      width: 150,
-      height: 150,
-      child: CircleAvatar(
-        backgroundImage: AssetImage(
-          'assets/imagens/avatar.png',
+    return Stack(
+      children: [
+        image != null
+            ? CircleAvatar(
+                backgroundImage: MemoryImage(image!),
+                radius: 75,
+              )
+            : Positioned(
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  child: const CircleAvatar(
+                    backgroundImage: AssetImage(
+                      'assets/imagens/avatar.png',
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 4, color: Colors.white),
+                    boxShadow: [
+                      BoxShadow(
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        color: Colors.black.withOpacity(0.1),
+                      )
+                    ],
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+        Positioned(
+          child: IconButton(
+            onPressed: selectImage,
+            icon: Icon(Icons.add_a_photo),
+          ),
+          bottom: -10,
+          left: 90,
         ),
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(width: 4, color: Colors.white),
-        boxShadow: [
-          BoxShadow(
-            spreadRadius: 2,
-            blurRadius: 10,
-            color: Colors.black.withOpacity(0.1),
-          )
-        ],
-        shape: BoxShape.circle,
-      ),
+      ],
     );
   }
 }
