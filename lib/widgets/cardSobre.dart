@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../domain/sobre.dart';
+import '../domain/Sobre.dart';
 
 class CardSobre extends StatefulWidget {
   final Sobre cardSobre;
@@ -75,7 +75,8 @@ class _CardSobreState extends State<CardSobre> {
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Color(int.parse(widget.cardSobre.cor_titulo)))),
+                            color:
+                                Color(int.parse(widget.cardSobre.cor_titulo)))),
                     Divider(color: Colors.black),
                     Text(
                       widget.cardSobre.descricao,

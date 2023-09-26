@@ -1,4 +1,4 @@
-import 'package:projeto/db/DBHelperPortal.dart';
+import 'package:projeto/db/DBHelper.dart';
 import 'package:projeto/domain/Portal.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -39,4 +39,3 @@ class PortalCardDao {
     return list;
   }
 }
-

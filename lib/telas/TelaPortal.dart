@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto/db/telaPortal_dao.dart';
+import 'package:projeto/db/PortalDao.dart';
 import 'package:projeto/domain/Portal.dart';
 import 'package:projeto/widgets/ContainerPortal.dart';
 import 'package:projeto/widgets/ContainerPortalCard.dart';
@@ -16,7 +16,6 @@ class TelaPortal extends StatefulWidget {
 class _TelaPortalState extends State<TelaPortal> {
   @override
   Widget build(BuildContext context) {
-
     Future<List<PortalCard>> futureLista2 = PortalCardDao().findAll();
     Future<List<Portal>> futureLista = PortalDao().findAll();
 

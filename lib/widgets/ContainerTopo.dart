@@ -39,20 +39,6 @@ class _ContainerTopoState extends State<ContainerTopo> {
       ),
       child: Stack(
         children: [
-/*
-          Positioned(
-            top: 15,
-            right: 10,
-            child: Container(
-              height: 90,
-              width: 90,
-              child: Image.asset(
-                'assets/imagens/logo.png',
-                fit: BoxFit.scaleDown,
-              ),
-            ),
-          ),
-*/
           Positioned(
               top: widget.topWhite,
               left: 0,

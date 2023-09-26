@@ -4,7 +4,7 @@ import 'package:projeto/widgets/ContainerTopo.dart';
 import 'package:projeto/widgets/CircleBack.dart';
 import 'package:projeto/widgets/TutorialWidgetsTop.dart';
 import 'package:projeto/domain/tutorial.dart';
-import 'package:projeto/db/tutorial1Dao.dart';
+import 'package:projeto/db/Tutorial1Dao.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
 
 class Tutorial1 extends StatefulWidget {

@@ -6,20 +6,19 @@ class User {
   late String nome;
 
   User({
-    required this.id, 
-    required this.email, 
+    required this.id,
+    required this.email,
     required this.senha,
-    required this.ocupacao, 
+    required this.ocupacao,
     required this.nome,
-    });
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     email = json['email'];
     senha = json['senha'];
-ocupacao = json['ocupacao'];
+    ocupacao = json['ocupacao'];
     nome = json['nome'];
-
   }
 
   Map<String, dynamic> toJson() {
@@ -29,8 +28,7 @@ ocupacao = json['ocupacao'];
     data['senha'] = senha;
     data['ocupacao'] = ocupacao;
     data['nome'] = nome;
-    
+
     return data;
   }
-
 }

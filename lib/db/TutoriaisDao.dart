@@ -1,10 +1,9 @@
 import 'package:projeto/db/DBHelper.dart';
-import 'package:projeto/domain/tutoriais.dart';
+import 'package:projeto/domain/Tutoriais.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TutoriaisDao {
-
-  Future<List<Tutoriais>>  findAll() async {
+  Future<List<Tutoriais>> findAll() async {
     await Future.delayed(const Duration(seconds: 5));
     DBHelper dbHelperTutoriais = DBHelper();
     Database db = await dbHelperTutoriais.initDB();
