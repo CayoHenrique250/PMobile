@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:projeto/db/TutoriaisDao.dart';
 import 'package:projeto/domain/tutoriais.dart';
 import 'package:projeto/widgets/CardTutoriais.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
-import '../db/telaTutoriais_dao.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
 
 class TelaTutoriais extends StatefulWidget {
@@ -12,7 +12,7 @@ class TelaTutoriais extends StatefulWidget {
 }
 
 class _TelaTutoriaisState extends State<TelaTutoriais> {
-  Future<List<Tutoriais>> futureLista = PacoteDao().findAll();
+  Future<List<Tutoriais>> futureLista = TutoriaisDao().findAll();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,7 +45,7 @@ class _TelaTutoriaisState extends State<TelaTutoriais> {
                       itemCount: lista.length,
                       itemBuilder: (context, index) {
                         return CardTutoriais(
-                          cardTutorias: lista[index],
+                          cardTutorias: lista[index], one: index,
                         );
                       },
                     );

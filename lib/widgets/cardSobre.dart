@@ -29,7 +29,7 @@ class _CardSobreState extends State<CardSobre> {
                     height: 200,
                     width: 350,
                     decoration: BoxDecoration(
-                      color: Color(widget.cardSobre.cor),
+                      color: Color(int.parse(widget.cardSobre.cor)),
                       borderRadius: BorderRadius.circular(0.0),
                       boxShadow: [
                         new BoxShadow(
@@ -75,7 +75,7 @@ class _CardSobreState extends State<CardSobre> {
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Color(widget.cardSobre.cor_titulo))),
+                            color: Color(int.parse(widget.cardSobre.cor_titulo)))),
                     Divider(color: Colors.black),
                     Text(
                       widget.cardSobre.descricao,

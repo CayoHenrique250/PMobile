@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto/widgets/cardSobre.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
-import 'package:projeto/db/telaSobre_dao.dart';
+import 'package:projeto/db/SobreDao.dart';
 import 'package:projeto/domain/sobre.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
 
@@ -13,7 +13,7 @@ class TelaSobre extends StatefulWidget {
 }
 
 class _TelaSobreState extends State<TelaSobre> {
-  Future<List<Sobre>> futureLista = PacoteDao().findAll();
+  Future<List<Sobre>> futureLista = SobreDao().findAll();
   @override
   Widget build(BuildContext context) {
     return SafeArea(

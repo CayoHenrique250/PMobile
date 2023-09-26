@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 
 class Tutoriais {
-  final String imagem;
-  final String titulo;
-  final int cor;
-  final int cor_titulo;
-  final String descricao;
-  final Widget proxima;
+  late String imagem;
+  late String titulo;
+  late String cor;
+  late String cor_titulo;
+  late String descricao;
 
-  const Tutoriais({
+  Tutoriais({
     required this.imagem,
     required this.titulo,
     required this.cor,
     required this.cor_titulo,
     required this.descricao,
-    required this.proxima,
   });
+
+  Tutoriais.fromJson(Map<String, dynamic> json) {
+    imagem = json['imagem'];
+    titulo = json['titulo'];
+    cor = json['cor'];
+    cor_titulo = json['cor_titulo'];
+    descricao = json['descricao'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['imagem'] = this.imagem;
+    data['titulo'] = this.titulo;
+    data['cor'] = this.cor;
+    data['cor_titulo'] = this.cor_titulo;
+    data['descricao'] = this.descricao;
+
+    return data;
+  }
 }
+
