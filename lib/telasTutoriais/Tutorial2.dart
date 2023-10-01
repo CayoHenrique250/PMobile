@@ -7,6 +7,9 @@ import 'package:projeto/domain/tutorial.dart';
 import 'package:projeto/db/Tutorial2Dao.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
 
+import 'dart:async';
+import 'package:projeto/widgets/TimeTracker.dart';
+
 class Tutorial2 extends StatefulWidget {
   const Tutorial2({super.key});
 
@@ -22,6 +25,8 @@ class _Tutorial1State extends State<Tutorial2> {
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
+    TimeTracker2.reset2();
+    _startTimer2();
   }
 
   void _scrollListener() {
@@ -34,6 +39,14 @@ class _Tutorial1State extends State<Tutorial2> {
         _isVisible = false;
       });
     }
+  }
+
+  void _startTimer2() {
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        TimeTracker2.incrementTime2();
+      });
+    });
   }
 
   Future<List<TutorialWidgets>> futureLista = TutorialWidgetsDao().findAll();

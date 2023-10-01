@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projeto/db/PerfilDao.dart';
 import 'package:projeto/widgets/CircleBack.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
@@ -28,7 +27,6 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
   String nome = '';
   String sobrenome = '';
   String ocupacao = '';
-  String id = "";
 
   @override
   Widget build(BuildContext context) {
@@ -100,20 +98,6 @@ class _TelaCadastrarState extends State<TelaCadastrar> {
             keyboardType: TextInputType.name,
             decoration: const InputDecoration(
               labelText: ('Ocupação'),
-              border: OutlineInputBorder(),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          TextField(
-            controller: idController,
-            onChanged: (Text) {
-              id = Text;
-            },
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              labelText: ('ID'),
               border: OutlineInputBorder(),
             ),
           ),
@@ -228,13 +212,12 @@ Future<void> onPressed(
   String email = emailController.text;
   String password = passwordController.text;
   String password2 = password2Controller.text;
-  String id = idController.text;
   String nome = nomeController.text;
   String ocupacao = ocupacaoController.text;
 
   if (password == password2) {
     User user = User(
-        id: id, email: email, senha: password, nome: nome, ocupacao: ocupacao);
+        email: email, senha: password, nome: nome, ocupacao: ocupacao);
     UserDao().salvarUsuario(user: user);
 
     Navigator.pop(context);

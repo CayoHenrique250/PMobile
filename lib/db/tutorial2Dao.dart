@@ -4,8 +4,8 @@ import 'package:projeto/db/DBHelper.dart';
 
 class TutorialWidgetsDao {
   Future<List<TutorialWidgets>> findAll() async {
-    await Future.delayed(const Duration(seconds: 5));
-    DBHelperTutorialWidget2 dbHelperTutorialWidgets = DBHelperTutorialWidget2();
+    await Future.delayed(const Duration(seconds: 2));
+    DBHelper dbHelperTutorialWidgets = DBHelper();
     Database db = await dbHelperTutorialWidgets.initDB();
 
     String sql = 'SELECT * FROM TUTORIAL2;';
@@ -23,8 +23,8 @@ class TutorialWidgetsDao {
 
 class TutorialWidgetsTextImgDao {
   Future<List<TutorialWidgetsTextImg>> findAll() async {
-    await Future.delayed(const Duration(seconds: 5));
-    DBHelperTutorialWidgetsTextImg2 dbHelperTutorialWidgetsTextImg = DBHelperTutorialWidgetsTextImg2();
+    await Future.delayed(const Duration(seconds: 2));
+    DBHelper dbHelperTutorialWidgetsTextImg = DBHelper();
     Database db = await dbHelperTutorialWidgetsTextImg.initDB();
 
     String sql = 'SELECT * FROM TEXTO_IMG2;';
