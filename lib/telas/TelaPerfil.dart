@@ -3,11 +3,12 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projeto/domain/User.dart';
-import 'package:projeto/telas/TelaLogin.dart';
 import 'package:projeto/widgets/Utils.dart';
 import 'package:projeto/widgets/CardPerfil.dart';
 import 'package:projeto/db/PerfilDao.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
+// import 'package:path_provider/path_provider.dart';
+// import 'dart:io';
 
 class TelaPerfil extends StatefulWidget {
   const TelaPerfil({super.key});
@@ -25,6 +26,12 @@ class _TelaPerfilState extends State<TelaPerfil> {
       image = img;
     });
   }
+
+// Future<void> saveImage(File pickedImage) async {
+//   final directory = await getApplicationDocumentsDirectory();
+//   final imagePath = directory.path + '/saved_image.jpg';
+//   await pickedImage.copy(imagePath);
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -57,36 +64,6 @@ class _TelaPerfilState extends State<TelaPerfil> {
 
                   return const Center(child: CircularProgress());
                 }),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                margin: const EdgeInsets.all(35.0),
-                width: 250,
-                height: 35,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFD35443),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return TelaLogin();
-                        },
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'SAIR',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),

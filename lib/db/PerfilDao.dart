@@ -25,7 +25,7 @@ class PerfilDao {
   }
 
   Future<User> findByEmail(String email) async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 2));
     DBHelper dbHelper = DBHelper();
     Database db = await dbHelper.initDB();
 

@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class SobreDao {
   Future<List<Sobre>> findAll() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 2));
     DBHelper dbHelperSobre = DBHelper();
     Database db = await dbHelperSobre.initDB();
 

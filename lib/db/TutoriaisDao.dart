@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class TutoriaisDao {
   Future<List<Tutoriais>> findAll() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 2));
     DBHelper dbHelperTutoriais = DBHelper();
     Database db = await dbHelperTutoriais.initDB();
 
