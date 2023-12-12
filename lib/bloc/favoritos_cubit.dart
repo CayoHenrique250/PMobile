@@ -10,7 +10,19 @@ class FavoritosCubit extends Cubit<List<Tutoriais>> {
         super([]);
 
   addFavorite(Tutoriais tutoriais) {
-    _tutoriais.add(tutoriais);
+    if (!_tutoriais.contains(tutoriais)) {
+      _tutoriais.add(tutoriais);
+      emit(_tutoriais);
+    }
+  }
+
+  removeFavorite(Tutoriais tutoriais) {
+    _tutoriais.remove(tutoriais);
+    emit(_tutoriais);
+  }
+
+  clearFavorites() {
+    _tutoriais.clear();
     emit(_tutoriais);
   }
 

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:projeto/bloc/favoritos_cubit.dart';
 import 'package:projeto/domain/tutoriais.dart';
-import 'package:projeto/telas/TelaTutoriais.dart';
 import 'package:projeto/widgets/CircleBack.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
@@ -25,7 +24,6 @@ class _TelaFavoritosState extends State<TelaFavoritos> {
     super.initState();
 
     Timer(Duration(seconds: 3), () {
-    
       setState(() {
         showProgress = false;
       });
@@ -70,20 +68,33 @@ class _TelaFavoritosState extends State<TelaFavoritos> {
                     },
                   );
                 }
-            
+
                 return Center(
                   child: showProgress
-                  ? CircularProgress()
-                  : Text(
-                    'Você não possui favoritos!',
-                    style: TextStyle(fontSize: 20),
-                  ),
+                      ? CircularProgress()
+                      : Text(
+                          'Você não possui favoritos!',
+                          style: TextStyle(fontSize: 20),
+                        ),
                 );
               },
             ),
           ]),
         ),
-        floatingActionButton: CircleBack(),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            CircleBack(),
+            SizedBox(height: 16),
+            FloatingActionButton(
+              onPressed: () {
+                context.read<FavoritosCubit>().clearFavorites();
+              },
+              child: Icon(Icons.delete, color: Colors.white,),
+              backgroundColor: Color(0xFF33691E),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -9,28 +9,21 @@ class CardTutoriais extends StatefulWidget {
   final Tutoriais cardTutorias;
   final int one;
 
-  const CardTutoriais({
-    Key? key, 
-    required this.cardTutorias, 
-    required this.one
-    }) : super(key: key);
+  const CardTutoriais({Key? key, required this.cardTutorias, required this.one})
+      : super(key: key);
 
   @override
   State<CardTutoriais> createState() => _CardTutoriaisState();
 }
 
 class _CardTutoriaisState extends State<CardTutoriais> {
-
-bool isFavorite = false;
+  bool isFavorite = false;
 
   @override
   void initState() {
     super.initState();
 
-    isFavorite =
-        context
-            .read<FavoritosCubit>()
-            .isFavorite(widget.cardTutorias);
+    isFavorite = context.read<FavoritosCubit>().isFavorite(widget.cardTutorias);
   }
 
   @override
@@ -137,23 +130,30 @@ bool isFavorite = false;
               ),
             ),
             Positioned(
-                  top: 210,
-                  right: 20,
-                  child: IconButton(
-                    icon: Icon(
-                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                      size: 32,
-                      color: isFavorite ? const Color(0xFFE81F7C) : Colors.grey,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isFavorite = true;
-                      });
-                      context
-                          .read<FavoritosCubit>()
-                          .addFavorite(widget.cardTutorias);
-                    },
-                  ),
+              top: 210,
+              right: 20,
+              child: IconButton(
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  size: 32,
+                  color: isFavorite ? const Color(0xFFE81F7C) : Colors.grey,
+                ),
+                onPressed: () {
+                  setState(() {
+                    isFavorite = !isFavorite;
+                  });
+
+                  if (isFavorite) {
+                    context
+                        .read<FavoritosCubit>()
+                        .addFavorite(widget.cardTutorias);
+                  } else {
+                    context
+                        .read<FavoritosCubit>()
+                        .removeFavorite(widget.cardTutorias);
+                  }
+                },
+              ),
             ),
           ],
         ));
