@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto/db/PerfilDao.dart';
+import 'package:projeto/db/Shared_Preferences.dart';
 import 'package:projeto/telas/TelaPrincipal.dart';
 import 'package:projeto/widgets/ContainerTopo.dart';
 import 'TelaCadastrar.dart';
@@ -135,6 +136,8 @@ class _TelaLoginState extends State<TelaLogin> {
     bool result = await UserDao().autenticar(user: email, password: password);
     if (result) {
       PerfilDao.email = email;
+      Preferences().setUser(true);
+      Preferences().setUserEmail(email);
 
       Navigator.pushReplacement(
         context,

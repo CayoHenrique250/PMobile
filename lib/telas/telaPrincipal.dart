@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto/telas/TelaPerfil.dart';
 import 'package:projeto/telas/TelaPortal.dart';
+import 'package:projeto/telas/TelaWeather.dart';
 import 'package:projeto/telas/TelaSobre.dart';
 import 'package:projeto/telas/TelaTutoriais.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -19,6 +20,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
     TelaSobre(),
     TelaTutoriais(),
     TelaPortal(),
+    TelaWeather(),
     TelaPerfil(),
   ];
 
@@ -47,6 +49,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
               GButton(icon: CupertinoIcons.compass, text: 'Sobre'),
               GButton(icon: CupertinoIcons.scissors_alt, text: 'Tutoriais'),
               GButton(icon: CupertinoIcons.paperplane, text: 'Portal'),
+              GButton(icon: CupertinoIcons.cloud, text: 'Tempo'),
               GButton(icon: CupertinoIcons.person, text: 'Perfil'),
             ],
           ),

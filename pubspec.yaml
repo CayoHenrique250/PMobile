@@ -40,6 +40,11 @@ dependencies:
   path:
   image_picker: ^1.0.4 
   path_provider: ^2.1.1
+  google_maps_flutter: ^2.5.0
+  geocoding:
+  http:
+  shared_preferences: ^2.2.2
+  flutter_bloc: ^8.1.3
 
 dev_dependencies:
   flutter_test:
