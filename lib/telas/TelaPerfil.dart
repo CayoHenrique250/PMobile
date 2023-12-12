@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projeto/domain/User.dart';
@@ -7,8 +6,8 @@ import 'package:projeto/widgets/Utils.dart';
 import 'package:projeto/widgets/CardPerfil.dart';
 import 'package:projeto/db/PerfilDao.dart';
 import 'package:projeto/widgets/CircularProgress.dart';
-// import 'package:path_provider/path_provider.dart';
-// import 'dart:io';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'TelaLocalizacao.dart';
 
 class TelaPerfil extends StatefulWidget {
   const TelaPerfil({super.key});
@@ -19,19 +18,14 @@ class TelaPerfil extends StatefulWidget {
 class _TelaPerfilState extends State<TelaPerfil> {
   Uint8List? image;
 
-  Future<User> futureLista = PerfilDao().findByEmail(PerfilDao.email);
+ Future<User> futureLista = PerfilDao().findByEmail(PerfilDao.email);
+ 
   void selectImage() async {
     Uint8List img = await pickerImage(ImageSource.gallery);
     setState(() {
       image = img;
     });
   }
-
-// Future<void> saveImage(File pickedImage) async {
-//   final directory = await getApplicationDocumentsDirectory();
-//   final imagePath = directory.path + '/saved_image.jpg';
-//   await pickedImage.copy(imagePath);
-// }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +60,32 @@ class _TelaPerfilState extends State<TelaPerfil> {
                 }),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green,
+          onPressed: onPressed,
+          child: Tooltip(
+            child: const Icon(
+              Icons.location_on,
+            ),
+            message: 'Local de desenvolvimento do APP',
+            padding: const EdgeInsets.all(20),
+            showDuration: const Duration(seconds: 5),
+            textStyle: TextStyle(color:Colors.green),
+            preferBelow: true,
+            verticalOffset: 20,
+          ),//Icon(Icons.location_on),
+        ),
+      ),
+    );
+  }
+
+  Future<void> onPressed() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return TelaLocalizacao(latLng: LatLng(-9.745411162098662, -36.63129421710423));
+        },
       ),
     );
   }

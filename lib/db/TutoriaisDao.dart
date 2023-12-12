@@ -1,5 +1,5 @@
 import 'package:projeto/db/DBHelper.dart';
-import 'package:projeto/domain/Tutoriais.dart';
+import 'package:projeto/domain/tutoriais.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TutoriaisDao {

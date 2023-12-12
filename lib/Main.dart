@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:projeto/telas/TelaLogin.dart';
+import 'package:projeto/telas/Splash.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto/bloc/favoritos_cubit.dart';
 
 void main() {
   runApp(
-    MaterialApp(debugShowCheckedModeBanner: false, home: TelaLogin()),
+    BlocProvider(
+      create: (BuildContext context) => FavoritosCubit(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Splash(),
+      ),
+    ),
   );
 }

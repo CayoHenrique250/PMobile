@@ -11,10 +11,10 @@ class ContainerPortal extends StatelessWidget {
   }) : super(key: key);
 
   Future<void> _launchUrl() async {
-    if (await canLaunch(portal.url)) {
-      await launch(portal.url);
+    if (await canLaunchUrl(Uri.parse(portal.url))) {
+      await launchUrl(Uri.parse(portal.url));
     } else {
-      throw Exception('Could not launch $portal.url');
+      throw 'Could not launch';
     }
   }
 

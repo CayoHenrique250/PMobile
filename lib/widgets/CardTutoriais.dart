@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:projeto/domain/Tutoriais.dart';
-
+import 'package:projeto/domain/tutoriais.dart';
 import '../telasTutoriais/Tutorial1.dart';
 import '../telasTutoriais/Tutorial2.dart';
+import 'package:projeto/bloc/favoritos_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardTutoriais extends StatefulWidget {
   final Tutoriais cardTutorias;
   final int one;
 
   const CardTutoriais({
-    required this.cardTutorias,
-    required this.one,
-    Key? key,
-  }) : super(key: key);
+    Key? key, 
+    required this.cardTutorias, 
+    required this.one
+    }) : super(key: key);
 
   @override
   State<CardTutoriais> createState() => _CardTutoriaisState();
 }
 
 class _CardTutoriaisState extends State<CardTutoriais> {
+
+bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    isFavorite =
+        context
+            .read<FavoritosCubit>()
+            .isFavorite(widget.cardTutorias);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -117,11 +131,30 @@ class _CardTutoriaisState extends State<CardTutoriais> {
                               fontSize: 18,
                             ),
                           ),
-                        ))
+                        )),
                   ],
                 ),
               ),
-            )
+            ),
+            Positioned(
+                  top: 210,
+                  right: 20,
+                  child: IconButton(
+                    icon: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      size: 32,
+                      color: isFavorite ? const Color(0xFFE81F7C) : Colors.grey,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isFavorite = true;
+                      });
+                      context
+                          .read<FavoritosCubit>()
+                          .addFavorite(widget.cardTutorias);
+                    },
+                  ),
+            ),
           ],
         ));
   }

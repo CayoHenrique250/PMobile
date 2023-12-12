@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto/domain/User.dart';
+import 'package:projeto/telas/TelaFavoritos.dart';
 import 'package:projeto/telas/TelaLogin.dart';
 
 import 'package:projeto/widgets/TimeTracker.dart';
@@ -57,9 +58,52 @@ class _CardPerfilState extends State<CardPerfil> {
             color: Colors.black,
           ),
         ),
-
+        SizedBox(height: 54),
+        const Padding(
+          padding: EdgeInsets.only(left: 16.0),
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              'ACESSE OS TUTORIAIS FAVORITOS:',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: Colors.lightGreen,
+              ),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Container(
+            margin: const EdgeInsets.all(35.0),
+            width: 250,
+            height: 35,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 80, 172, 107),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const TelaFavoritos();
+                    },
+                  ),
+                );
+              },
+              child: Text(
+                'FAVORITOS',
+                style: TextStyle(color: Colors.white, fontSize: 15),
+              ),
+            ),
+          ),
+        ),
         tutoriaisConcluidos(),
-
         Align(
           alignment: Alignment.center,
           child: Container(
@@ -97,9 +141,9 @@ class _CardPerfilState extends State<CardPerfil> {
 
 tutoriaisConcluidos() {
   return Column(children: [
-    const SizedBox(height: 30),
+    const SizedBox(height: 5),
     const Padding(
-      padding: EdgeInsets.only(left: 16.0), 
+      padding: EdgeInsets.only(left: 16.0),
       child: Align(
         alignment: Alignment.bottomLeft,
         child: Text(
